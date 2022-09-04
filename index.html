@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<p>
+			defineProperty,访问器属性这个属性不能在对象中设置，
+			而是必须通过defineProperty()方法单独定义
+			可以像普通属性一样读取访问器属性，但是当读取或设置访问器属性的时候，
+			调用其内部特性：get和set函数。get和set方法内部的this都指向obj，
+			这意味着get和set可以操作对象内部的值。另外访问器属性会被优先调用，
+			与其同名的普通属性则会被忽略
+		</p>
+		<p>
+			<input type="text" id="o1" placeholder="输入内容" />
+		</p>
+		<p>
+			你输入了：<span id="o2"></span>
+		</p>
+		<script>
+			let obj={}
+			Object.defineProperty(obj,'data',{
+				set:(newVal)=>{
+					document.getElementById('o1').value=newVal
+					document.getElementById('o2').innerHTML=newVal
+				}
+			})
+			
+			document.addEventListener('keyup',(e)=>{
+				obj.data=e.target.value
+			})
+		</script>
+	</body>
+</html>
